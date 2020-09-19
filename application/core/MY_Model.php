@@ -69,25 +69,6 @@ class MY_Model extends CI_Model {
         return $this;
     }
 
-    public function join_price() {
-        $this->db->select('products.*, p.price, p.unit_id as p_unit_id');
-        $this->db->join('prices p', 'p.id = products.price_id', 'left');
-        return $this;
-    }
-
-    public function join_identificator() {
-        $this->db->select('pi.name as pi_name');
-        $this->db->join('product_identificators as pi', 'pi.id = products.product_identificator_id', 'left');
-        return $this;
-    }
-
-    public function group_concat() {
-        $this->db->select('group_concat(pis.item_id) as pi_items');
-        $this->db->join('product_items pis', 'pis.product_id = products.id and pis.product_category_id = 1', 'left');
-        $this->db->group_by('products.id');
-        return $this;
-    }
-
     public function fields($table) {
         $list =  $this->db->list_fields($table);
         $return = array();
